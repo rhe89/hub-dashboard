@@ -10,7 +10,7 @@ services:
     dashboard-web:
         container_name: "dashboard_web"
         build: 
-            context: ./src/Dashboard
+            context: ./hub-dashboard
             dockerfile: Dashboard.Web.Ui/Dockerfile
         image: "dashboard/web"
         hostname: "dashboard-web"
