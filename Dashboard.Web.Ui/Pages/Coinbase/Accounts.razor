@@ -1,0 +1,34 @@
+@using Dashboard.Web.Ui.Helpers
+@using Dashboard.ViewModels.Coinbase
+@using Dashboard.Services
+@inject ICoinbaseApiService CoinbaseApiService;
+
+@if (!ViewModelValidator.IsValid(_accountsViewModel)) 
+{
+    return;
+}
+
+@foreach (var account in _accountsViewModel.Accounts)
+    {
+        <Grid Item>
+            <Account AccountDto="@account"/>
+        </Grid>
+    }
+
+@code
+{
+    private AccountsViewModel _accountsViewModel;
+    [Parameter]
+    public bool Loading { get; set; }
+    [Parameter]
+    public EventCallback<bool> LoadingChanged { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _accountsViewModel = await CoinbaseApiService.GetAccounts();
+
+        Loading = false;
+        
+        await LoadingChanged.InvokeAsync(Loading);
+    }
+}

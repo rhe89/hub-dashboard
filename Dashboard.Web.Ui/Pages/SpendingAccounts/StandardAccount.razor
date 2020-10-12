@@ -1,0 +1,35 @@
+@using Dashboard.ViewModels.Sbanken
+@using Dashboard.Dto.Sbanken
+@using Dashboard.Web.Ui.Extension
+
+@if (Account == null)
+{
+    return;
+}   
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @Account.Name
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.H4"
+            Component="h4">
+            @Account.Balance.ToCurrency()
+        </Typography>
+        
+         @if (Account.Transactions != null && Account.Transactions.Any())
+        {
+            <TransactionsModal Transactions="@Account.Transactions"/>
+        }
+
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public AccountDto Account { set; get; }
+}

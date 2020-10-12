@@ -1,0 +1,50 @@
+@using Dashboard.ViewModels.Sbanken
+@using Dashboard.Dto.Sbanken
+@using Dashboard.Web.Ui.Extension
+
+@if (Account == null)
+{
+    return;
+}   
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @Account.Name  <BalanceChangeIcon 
+                               CurrentValue="@Account.Balance"
+                               PreviousValue="@Account.LastMonthBalance"/>
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.H4"
+            Component="h4">
+            @Account.Balance.ToCurrency()
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            Spart denne mnd: @(SavedThisMonth.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            Spart i år: @(SavedThisYear.ToCurrency())
+        </Typography>
+        
+        @if (Account.Transactions != null && Account.Transactions.Any())
+        {
+            <TransactionsModal Transactions="@Account.Transactions"/>
+        }
+        
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public AccountDto Account { get; set; }
+
+    private decimal SavedThisMonth => Account?.Balance - Account?.LastMonthBalance ?? 0;
+    private decimal SavedThisYear => Account?.Balance - Account?.LastMonthBalance ?? 0;
+}

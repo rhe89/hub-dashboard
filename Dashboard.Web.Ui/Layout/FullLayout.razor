@@ -1,0 +1,101 @@
+﻿@inherits LayoutComponentBase
+
+<MainLayout>
+    <TitleContent>
+        <Typography
+            Style="flex-grow: 1; margin-left: 20px;"
+            Variant="@TypographyVariant.H6"
+            NoWrap>
+            Hub
+        </Typography>
+    </TitleContent>
+    <ActionsContent>
+        <Hidden
+            MediumDown
+            Context="HiddenContext">
+            <div
+                Class="@HiddenContext.Class">
+                <IconButton
+                    Color="@Color.Inherit"
+                    OnClick="@HandleNotificationsClick">
+                    <Badge
+                        Badge="@Notifications"
+                        Color="@Color.Primary"
+                        Variant="@BadgeVariant.Dot">
+                        <NotificationsOutlinedIcon />
+                    </Badge>
+                </IconButton>
+                <IconButton
+                    Class="FullLayout-Signout"
+                    Color="@Color.Inherit"
+                    OnClick="@HandleSignoutClick">
+                    <InputIcon />
+                </IconButton>
+            </div>
+        </Hidden>
+    </ActionsContent>
+    <SidebarContent>
+        <Divider
+            Class="FullLayout-Divider" />
+        <Navigation
+            Class="FullLayout-Navigation"
+            Items="@Items">
+        </Navigation>
+    </SidebarContent>
+    <BodyContent>
+        @Body
+    </BodyContent>
+    <FooterContent>
+        
+    </FooterContent>
+</MainLayout>
+
+@code
+{
+     private List<NavigationItem> Items = new List<NavigationItem>
+    {
+        new NavigationItem
+        {
+            Title = "Dashboard",
+            Path = "dashboard",
+            Icon = @<DashboardIcon />,
+            Prefix = false
+        },
+        
+        new NavigationItem
+        {
+            Title = "Sparing og investering",
+            Path = "savingandinvestments",
+            Icon = @<AccountBalanceIcon />,
+            Prefix = false
+        },
+        
+        new NavigationItem
+        {
+            Title = "Forbruk",
+            Path = "spendingaccounts",
+            Icon = @<MoneyIcon />,
+            Prefix = false
+        },
+        
+        new NavigationItem
+        {
+            Title = "Coinbase",
+            Path = "coinbase",
+            Icon = @<AccountBalanceWalletIcon />,
+            Prefix = false
+        },
+    };
+
+    private string Notifications { set; get; } = "10";
+
+    private void HandleNotificationsClick()
+    {
+        // OnNotificationsClick?.Invoke();
+    }
+
+    private void HandleSignoutClick()
+    {
+        // OnSignoutClick?.Invoke();
+    }
+}

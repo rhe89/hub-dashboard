@@ -1,0 +1,57 @@
+@using Dashboard.ViewModels.Sbanken
+@using Dashboard.Dto.Sbanken
+@using Dashboard.Web.Ui.Extension
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @DisplayName
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.H4"
+            Component="h4">
+            @Value.ToCurrency()
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix denne mnd: @(CurrentMonthTransactionsAmount.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix i år: @(CurrentYearTransactionsAmount.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix totalt: @(TotalTransactionsAmount.ToCurrency())
+        </Typography>
+            
+        @if (CurrentMonthTransactions.Any())
+        {
+            <TransactionsModal Transactions="@CurrentMonthTransactions"/>
+        }
+            
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public InvestmentsViewModel InvestmentsViewModel { get; set; }
+    [Parameter]
+    public string DisplayName { get; set; }
+    [Parameter]
+    public string AmountPrefix { get; set; }
+
+    private decimal Value => InvestmentsViewModel?.Value ?? 0;
+    private decimal CurrentMonthTransactionsAmount => InvestmentsViewModel?.TransactionSummary?.CurrentMonthTransactions?.Amount ?? 0;
+    private decimal CurrentYearTransactionsAmount => InvestmentsViewModel?.TransactionSummary?.CurrentYearTransactions?.Amount ?? 0;
+    private decimal TotalTransactionsAmount => InvestmentsViewModel?.TransactionSummary?.TotalAmount ?? 0;
+
+    private IList<TransactionDto> CurrentMonthTransactions => InvestmentsViewModel?.TransactionSummary?.CurrentMonthTransactions?.Transactions ?? new List<TransactionDto>();
+
+}

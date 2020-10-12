@@ -1,0 +1,29 @@
+@page "/spendingaccounts"
+
+@if (Loading)
+{
+    <Grid>
+        
+        <LinearProgress/>
+    </Grid>
+}
+
+<Grid
+    hidden="@Loading"
+    Container
+    Small="@GridSize.Ten"
+    Medium="@GridSize.Twelve"
+    Spacing="@Spacing.One"
+    Style="margin: 50px;">
+    
+    <StandardAccounts
+        @bind-Loading="_loadingStandardAccounts"/>
+</Grid>
+
+@code {
+
+    private bool _loadingStandardAccounts = true;
+
+    private bool Loading => _loadingStandardAccounts;
+
+}

@@ -1,0 +1,19 @@
+@if (CurrentValue - PreviousValue > 0)
+{
+ <ArrowUpwardIcon
+     style="padding-top: 5px;"
+     HtmlColor="#34eba1"/>
+} else if (CurrentValue - PreviousValue < 0)
+{
+ <ArrowDownwardIcon
+      style="padding-top: 5px;"
+      HtmlColor="#eb4634"/>
+}
+
+@code {
+    [Parameter]
+    public decimal CurrentValue { get; set;}
+    
+    [Parameter]
+    public decimal PreviousValue { get; set;}
+}

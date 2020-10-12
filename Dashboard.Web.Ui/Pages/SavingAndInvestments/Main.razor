@@ -1,0 +1,103 @@
+@page "/savingandinvestments"
+@using Dashboard.Services
+@using Dashboard.Web.Ui.Pages.Coinbase;
+@using Dashboard.ViewModels.Sbanken
+
+@inject IInvestmentAndSavingsService InvestmentAndSavingsService;
+
+@if (Loading)
+{
+    <Grid>
+        
+        <LinearProgress/>
+    </Grid>
+    return;
+}
+
+
+<Grid
+    hidden="@Loading"
+    Container
+    Small="@GridSize.Ten"
+    Medium="@GridSize.Twelve"
+    Spacing="@Spacing.One"
+    Style="margin: 50px;">
+    @if (_savingsAccountViewModel.Success)
+    {
+        <SavingsAccounts
+            AccountsViewModel="@_savingsAccountViewModel"/>
+    }
+
+    @if (_investmentsViewModel.Success)
+    {
+        <Grid Item>
+            <Investments
+                InvestmentsViewModel="@_investmentsViewModel"
+                DisplayName="Fond"
+                AmountPrefix="Investert"/>
+
+        </Grid>
+    }
+</Grid>
+
+
+@if (_mikrosparTransactionsViewModel.Success)
+{
+    <Grid
+        hidden="@Loading"
+        Container
+        Small="@GridSize.Ten"
+        Medium="@GridSize.Twelve"
+        Spacing="@Spacing.One"
+        Style="margin: 50px;">
+
+        <Grid Item>
+            <TransactionSummaries
+                TransactionSummariesViewModel="@_mikrosparTransactionsViewModel"
+                DisplayName="Mikrospar"
+                AmountPrefix="Overført"/>
+
+        </Grid>
+    </Grid>
+}
+
+@if (_coinbaseTotalViewModel.Success)
+{
+    <Grid
+        hidden="@Loading"
+        Container
+        Small="@GridSize.Ten"
+        Medium="@GridSize.Twelve"
+        Spacing="@Spacing.One"
+        Style="margin: 50px;">
+
+        <Grid Item>
+            <Account AccountDto="@_coinbaseTotalViewModel.Accounts.FirstOrDefault()"/>
+        </Grid>
+
+    </Grid>
+}
+
+
+    @code {
+
+    private ViewModels.Sbanken.AccountsViewModel _savingsAccountViewModel;
+    private ViewModels.Coinbase.AccountsViewModel _coinbaseTotalViewModel;
+    private InvestmentsViewModel _investmentsViewModel;
+    private TransactionSummariesViewModel _mikrosparTransactionsViewModel;
+    
+    private bool Loading { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Loading = true;
+        
+        _savingsAccountViewModel = await InvestmentAndSavingsService.GetSavingsAccounts();
+        _coinbaseTotalViewModel = await InvestmentAndSavingsService.GetCoinbaseTotal();
+        _investmentsViewModel = await InvestmentAndSavingsService.GetInvestments();
+        _mikrosparTransactionsViewModel = await InvestmentAndSavingsService.GetMikrosparTransactions();
+
+        Loading = false;
+    }
+
+}

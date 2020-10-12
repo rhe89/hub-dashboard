@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dashboard.Integration\Dashboard.Integration.csproj" />
+      <ProjectReference Include="..\Dashboard.ViewModels\Dashboard.ViewModels.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ApiConnectors" />
+    </ItemGroup>
+
+</Project>

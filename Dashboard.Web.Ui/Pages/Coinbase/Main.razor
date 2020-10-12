@@ -1,0 +1,28 @@
+@page "/coinbase"
+
+@if (Loading)
+{
+    <Grid>
+        <LinearProgress/>
+    </Grid>
+}
+
+<Grid 
+    hidden="@Loading"
+    Container
+    Small="@GridSize.Ten"
+    Medium="@GridSize.Twelve"
+    Spacing="@Spacing.One"
+    Style="margin: 50px;">
+    
+    <Accounts
+        @bind-Loading="_loadingAccounts"/>
+</Grid>
+
+@code {
+
+    private bool _loadingAccounts = true;
+
+    private bool Loading => _loadingAccounts;
+
+}
