@@ -22,7 +22,9 @@ namespace Dashboard.Services
             var response = await _sbankenApiConnector.GetTransactions(ageInDays);
 
             if (!response.Success)
+            {
                 return ViewModelMappings.GetErrorViewModel<TransactionsViewModel, TransactionDto[]>(response);
+            }
 
             return new TransactionsViewModel
             {
@@ -55,7 +57,9 @@ namespace Dashboard.Services
         private static AccountsViewModel GetAccountsViewModel(Response<IList<AccountDto>> response)
         {
             if (!response.Success)
+            {
                 return ViewModelMappings.GetErrorViewModel<AccountsViewModel, IList<AccountDto>>(response);
+            }
 
             return new AccountsViewModel
             {
@@ -69,7 +73,10 @@ namespace Dashboard.Services
             var response = await _sbankenApiConnector.GetMikrosparTransactions();
 
             if (!response.Success)
-                return ViewModelMappings.GetErrorViewModel<TransactionSummariesViewModel, TransactionSummaryDto>(response);
+            {
+                return ViewModelMappings.GetErrorViewModel<TransactionSummariesViewModel, TransactionSummaryDto>(
+                    response);
+            }
 
             return new TransactionSummariesViewModel
             {
@@ -83,7 +90,10 @@ namespace Dashboard.Services
             var response = await _sbankenApiConnector.GetInvestmentTransactions();
 
             if (!response.Success)
-                return ViewModelMappings.GetErrorViewModel<TransactionSummariesViewModel, TransactionSummaryDto>(response);
+            {
+                return ViewModelMappings.GetErrorViewModel<TransactionSummariesViewModel, TransactionSummaryDto>(
+                    response);
+            }
 
             return new TransactionSummariesViewModel
             {

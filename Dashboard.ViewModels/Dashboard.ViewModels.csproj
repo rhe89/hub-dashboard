@@ -9,7 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Hub.Web.ViewModels" Version="1.0.0" />
+      <PackageReference Include="Hub.Web.ViewModels" Version="1.0.1" />
     </ItemGroup>
 
 </Project>

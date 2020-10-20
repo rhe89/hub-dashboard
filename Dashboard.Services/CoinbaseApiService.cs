@@ -21,7 +21,9 @@ namespace Dashboard.Services
             var response = await _coinbaseApiConnector.GetAccounts();
 
             if (!response.Success)
+            {
                 return ViewModelMappings.GetErrorViewModel<AccountsViewModel, IList<AccountDto>>(response);
+            }
 
             return new AccountsViewModel
             {

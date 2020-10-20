@@ -20,7 +20,9 @@ namespace Dashboard.Services
             var accountsViewModel = await _sbankenApiService.GetSavingsAccounts();
 
             if (!accountsViewModel.Success)
+            {
                 return accountsViewModel;
+            }
 
             var savingSummary = new AccountDto
             {
@@ -41,7 +43,9 @@ namespace Dashboard.Services
             var accountsViewModel = await _coinbaseApiService.GetAccounts();
 
             if (!accountsViewModel.Success)
+            {
                 return accountsViewModel;
+            }
 
             var total = accountsViewModel.Accounts.First(x => x.Name == "Total");
             total.Name = "Coinbase";

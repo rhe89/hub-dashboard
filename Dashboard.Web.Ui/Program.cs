@@ -1,7 +1,4 @@
-using System.IO;
 using Hub.Web.HostBuilder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Dashboard.Web.Ui

@@ -20,7 +20,9 @@ namespace Dashboard.Services
             var accountsViewModel = await _coinbaseApiService.GetAccounts();
 
             if (!accountsViewModel.Success)
+            {
                 return accountsViewModel;
+            }
 
             var total = accountsViewModel.Accounts.First(x => x.Name == "Total");
             
@@ -50,17 +52,9 @@ namespace Dashboard.Services
             };
         }
 
-        public async Task<AccountsViewModel> GetSavingsAccounts()
+        public async Task<ViewModels.Sbanken.AccountsViewModel> GetSavingsAccounts()
         {
             return await _sbankenApiService.GetSavingsAccounts();
         }
-    }
-
-    public interface IInvestmentAndSavingsService
-    {
-        Task<ViewModels.Coinbase.AccountsViewModel> GetCoinbaseTotal();
-        Task<TransactionSummariesViewModel> GetMikrosparTransactions();
-        Task<InvestmentsViewModel> GetInvestments();
-        Task<AccountsViewModel> GetSavingsAccounts();
     }
 }
