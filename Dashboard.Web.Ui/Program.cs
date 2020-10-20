@@ -3,11 +3,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace Dashboard.Web.Ui
 {
-    public class Program : WebHostBuilder<Startup, DependencyRegistrationFactory>
+    public static class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            new  WebHostBuilder<Startup, DependencyRegistrationFactory>().CreateHostBuilder(args).Build().Run();
         }
     }
 }
