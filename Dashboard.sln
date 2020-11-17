@@ -3,17 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Data", "Dashboard.Data\Dashboard.Data.csproj", "{AC7D07C5-BAE7-494A-986F-2357C9D78B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Web.Ui", "Dashboard.Web.Ui\Dashboard.Web.Ui.csproj", "{3FC3FA67-A905-451A-A94E-658BAE1B1645}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.BlazorApp", "Dashboard.BlazorApp\Dashboard.BlazorApp.csproj", "{3FC3FA67-A905-451A-A94E-658BAE1B1645}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Integration", "Dashboard.Integration\Dashboard.Integration.csproj", "{D96DB9AA-9958-41DB-A753-711DFD3D907A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Services", "Dashboard.Services\Dashboard.Services.csproj", "{7386EC63-565C-4D78-BA69-ABF9E82E230A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Dto", "Dashboard.Dto\Dashboard.Dto.csproj", "{79CE5214-BDAF-453A-AFAD-D8E51FAD4FD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.ViewModels", "Dashboard.ViewModels\Dashboard.ViewModels.csproj", "{C35EBD9A-1EA1-423E-B5D4-C9EB7110A704}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{4FF25E95-0028-47AF-8ED4-56F3F61EF4D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,20 +25,7 @@ Global
 		{D96DB9AA-9958-41DB-A753-711DFD3D907A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D96DB9AA-9958-41DB-A753-711DFD3D907A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D96DB9AA-9958-41DB-A753-711DFD3D907A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7386EC63-565C-4D78-BA69-ABF9E82E230A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7386EC63-565C-4D78-BA69-ABF9E82E230A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7386EC63-565C-4D78-BA69-ABF9E82E230A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7386EC63-565C-4D78-BA69-ABF9E82E230A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79CE5214-BDAF-453A-AFAD-D8E51FAD4FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79CE5214-BDAF-453A-AFAD-D8E51FAD4FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79CE5214-BDAF-453A-AFAD-D8E51FAD4FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79CE5214-BDAF-453A-AFAD-D8E51FAD4FD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C35EBD9A-1EA1-423E-B5D4-C9EB7110A704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C35EBD9A-1EA1-423E-B5D4-C9EB7110A704}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C35EBD9A-1EA1-423E-B5D4-C9EB7110A704}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C35EBD9A-1EA1-423E-B5D4-C9EB7110A704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3FC3FA67-A905-451A-A94E-658BAE1B1645} = {4FF25E95-0028-47AF-8ED4-56F3F61EF4D8}
 	EndGlobalSection
 EndGlobal

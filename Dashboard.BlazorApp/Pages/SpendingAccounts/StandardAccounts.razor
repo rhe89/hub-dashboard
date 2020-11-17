@@ -1,0 +1,40 @@
+@using Dashboard.BlazorApp.Helpers
+@using Dashboard.BlazorApp.Services
+@using Dashboard.BlazorApp.ViewModels.Sbanken
+@inject ISbankenApiService SbankenApiService;
+
+@if (!ViewModelValidator.IsValid(_sbankenAccountsViewModel)) 
+{
+    return;
+}
+
+@foreach (var account in _sbankenAccountsViewModel.SbankenAccounts)
+    {
+        <Grid
+            Item
+            key="transactions"
+            ExtraSmall="@GridSize.Twelve"
+            Small="@GridSize.Ten"
+            Large="@GridSize.Three"
+            Medium="@GridSize.Four">
+            <StandardAccount SbankenAccount="@account"/>
+        </Grid>
+    }
+
+@code
+{
+    private SbankenAccountsViewModel _sbankenAccountsViewModel;
+    [Parameter]
+    public bool Loading { get; set; }
+    [Parameter]
+    public EventCallback<bool> LoadingChanged { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _sbankenAccountsViewModel = await SbankenApiService.GetStandardAccounts();
+
+        Loading = false;
+        
+        await LoadingChanged.InvokeAsync(Loading);
+    }
+}

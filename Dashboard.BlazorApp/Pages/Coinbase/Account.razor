@@ -1,0 +1,41 @@
+@using Dashboard.BlazorApp.Extension
+@using Dashboard.Integration.Dto.Coinbase
+
+@if (CoinbaseAccountDto == null)
+{
+    return;
+}   
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @CoinbaseAccountDto.Name <BalanceChangeIcon 
+                                 CurrentValue="@CoinbaseAccountDto.Balance"
+                                 PreviousValue="@CoinbaseAccountDto.LastMonthBalance"/>
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.H4"
+            Component="h4">
+            @CoinbaseAccountDto.Balance.ToCurrency()
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            Måned: @((CoinbaseAccountDto.Balance - CoinbaseAccountDto.LastMonthBalance).ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            I år: @((CoinbaseAccountDto.Balance - CoinbaseAccountDto.LastYearBalance).ToCurrency())
+        </Typography>
+
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public CoinbaseAccountDto CoinbaseAccountDto { set; get; }
+}

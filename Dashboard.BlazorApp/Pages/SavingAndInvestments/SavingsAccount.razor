@@ -1,0 +1,49 @@
+@using Dashboard.BlazorApp.Extension
+@using Dashboard.Integration.Dto.Sbanken
+
+@if (SbankenAccount == null)
+{
+    return;
+}   
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @SbankenAccount.Name  <BalanceChangeIcon 
+                               CurrentValue="@SbankenAccount.Balance"
+                               PreviousValue="@SbankenAccount.LastMonthBalance"/>
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.H4"
+            Component="h4">
+            @SbankenAccount.Balance.ToCurrency()
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            Spart denne mnd: @(SavedThisMonth.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            Spart i år: @(SavedThisYear.ToCurrency())
+        </Typography>
+        
+        @if (SbankenAccount.Transactions != null && SbankenAccount.Transactions.Any())
+        {
+            <TransactionsModal Transactions="@SbankenAccount.Transactions"/>
+        }
+        
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public SbankenAccountDto SbankenAccount { get; set; }
+
+    private decimal SavedThisMonth => SbankenAccount?.Balance - SbankenAccount?.LastMonthBalance ?? 0;
+    private decimal SavedThisYear => SbankenAccount?.Balance - SbankenAccount?.LastMonthBalance ?? 0;
+}

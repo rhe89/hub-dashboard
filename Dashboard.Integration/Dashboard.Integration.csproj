@@ -3,13 +3,13 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\Dashboard.Dto\Dashboard.Dto.csproj" />
+      <PackageReference Include="Hub.Web.Http" Version="1.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Hub.Web.Http" Version="1.0.1" />
+      <Folder Include="Dto" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,34 @@
+@using Dashboard.BlazorApp.Helpers
+@using Dashboard.BlazorApp.Services
+@using Dashboard.BlazorApp.ViewModels.Coinbase
+@inject ICoinbaseApiService CoinbaseApiService;
+
+@if (!ViewModelValidator.IsValid(_coinbaseAccountsViewModel)) 
+{
+    return;
+}
+
+@foreach (var account in _coinbaseAccountsViewModel.CoinbaseAccounts)
+    {
+        <Grid Item>
+            <Account CoinbaseAccountDto="@account"/>
+        </Grid>
+    }
+
+@code
+{
+    private CoinbaseAccountsViewModel _coinbaseAccountsViewModel;
+    [Parameter]
+    public bool Loading { get; set; }
+    [Parameter]
+    public EventCallback<bool> LoadingChanged { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _coinbaseAccountsViewModel = await CoinbaseApiService.GetAccounts();
+
+        Loading = false;
+        
+        await LoadingChanged.InvokeAsync(Loading);
+    }
+}

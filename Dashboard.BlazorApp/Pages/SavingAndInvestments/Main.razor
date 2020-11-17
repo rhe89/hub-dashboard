@@ -1,0 +1,102 @@
+@page "/savingandinvestments"
+@using Dashboard.BlazorApp.Services
+@using Dashboard.BlazorApp.ViewModels.Sbanken
+
+@inject IInvestmentAndSavingsService InvestmentAndSavingsService;
+
+@if (Loading)
+{
+    <Grid>
+        
+        <LinearProgress/>
+    </Grid>
+    return;
+}
+
+
+<Grid
+    hidden="@Loading"
+    Container
+    Small="@GridSize.Ten"
+    Medium="@GridSize.Twelve"
+    Spacing="@Spacing.One"
+    Style="margin: 50px;">
+    @if (_savingsSbankenAccountViewModel.Success)
+    {
+        <SavingsAccounts
+            SbankenAccountsViewModel="@_savingsSbankenAccountViewModel"/>
+    }
+
+    @if (_sbankenInvestmentsViewModel.Success)
+    {
+        <Grid Item>
+            <Investments
+                SbankenInvestmentsViewModel="@_sbankenInvestmentsViewModel"
+                DisplayName="Fond"
+                AmountPrefix="Investert"/>
+
+        </Grid>
+    }
+</Grid>
+
+
+@if (_mikrosparTransactionsViewModel.Success)
+{
+    <Grid
+        hidden="@Loading"
+        Container
+        Small="@GridSize.Ten"
+        Medium="@GridSize.Twelve"
+        Spacing="@Spacing.One"
+        Style="margin: 50px;">
+
+        <Grid Item>
+            <TransactionSummaries
+                TransactionSummariesViewModel="@_mikrosparTransactionsViewModel"
+                DisplayName="Mikrospar"
+                AmountPrefix="Overført"/>
+
+        </Grid>
+    </Grid>
+}
+
+@if (_coinbaseTotalViewModel.Success)
+{
+    <Grid
+        hidden="@Loading"
+        Container
+        Small="@GridSize.Ten"
+        Medium="@GridSize.Twelve"
+        Spacing="@Spacing.One"
+        Style="margin: 50px;">
+
+        <Grid Item>
+            <Account AccountDto="@_coinbaseTotalViewModel.CoinbaseAccounts.FirstOrDefault()"/>
+        </Grid>
+
+    </Grid>
+}
+
+
+    @code {
+
+    private ViewModels.Sbanken.SbankenAccountsViewModel _savingsSbankenAccountViewModel;
+    private ViewModels.Coinbase.CoinbaseAccountsViewModel _coinbaseTotalViewModel;
+    private SbankenInvestmentsViewModel _sbankenInvestmentsViewModel;
+    private TransactionSummariesViewModel _mikrosparTransactionsViewModel;
+    
+    private bool Loading { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Loading = true;
+        
+        _savingsSbankenAccountViewModel = await InvestmentAndSavingsService.GetSavingsAccounts();
+        _coinbaseTotalViewModel = await InvestmentAndSavingsService.GetCoinbaseTotal();
+        _sbankenInvestmentsViewModel = await InvestmentAndSavingsService.GetInvestments();
+        _mikrosparTransactionsViewModel = await InvestmentAndSavingsService.GetMikrosparTransactions();
+
+        Loading = false;
+    }
+
+}

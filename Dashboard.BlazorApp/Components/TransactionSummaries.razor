@@ -1,0 +1,51 @@
+@using Dashboard.BlazorApp.Extension
+@using Dashboard.BlazorApp.ViewModels.Sbanken
+@using Dashboard.Integration.Dto.Sbanken
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @DisplayName
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix denne mnd: @(CurrentMonthTransactionsAmount.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix i år: @(CurrentYearTransactionsAmount.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix totalt: @(TotalTransactionsAmount.ToCurrency())
+        </Typography>
+        
+        @if (CurrentMonthTransactions.Any())
+        {
+            <TransactionsModal Transactions="@CurrentMonthTransactions"/>
+        }
+        
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public TransactionSummariesViewModel TransactionSummariesViewModel { get; set; }
+    [Parameter]
+    public string DisplayName { get; set; }
+    [Parameter]
+    public string AmountPrefix { get; set; }
+
+    private decimal CurrentMonthTransactionsAmount => TransactionSummariesViewModel?.SbankenTransactionSummary?.CurrentMonthTransactions?.Amount ?? 0;
+    private decimal CurrentYearTransactionsAmount => TransactionSummariesViewModel?.SbankenTransactionSummary?.CurrentYearTransactions?.Amount ?? 0;
+    private decimal TotalTransactionsAmount => TransactionSummariesViewModel?.SbankenTransactionSummary?.TotalAmount ?? 0;
+
+    private IList<SbankenTransactionDto> CurrentMonthTransactions => TransactionSummariesViewModel?.SbankenTransactionSummary?.CurrentMonthTransactions?.Transactions ?? new List<SbankenTransactionDto>();
+
+}

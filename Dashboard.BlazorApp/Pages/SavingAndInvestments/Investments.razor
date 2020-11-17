@@ -1,0 +1,57 @@
+@using Dashboard.BlazorApp.Extension
+@using Dashboard.BlazorApp.ViewModels.Sbanken
+@using Dashboard.Integration.Dto.Sbanken
+
+<Card>
+    <CardContent>
+        <Typography
+            Variant="@TypographyVariant.H5"
+            Component="h5">
+            @DisplayName
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.H4"
+            Component="h4">
+            @Value.ToCurrency()
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix denne mnd: @(CurrentMonthTransactionsAmount.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix i år: @(CurrentYearTransactionsAmount.ToCurrency())
+        </Typography>
+        <Typography
+            Variant="@TypographyVariant.Body1"
+            Component="p">
+            @AmountPrefix totalt: @(TotalTransactionsAmount.ToCurrency())
+        </Typography>
+            
+        @if (CurrentMonthTransactions.Any())
+        {
+            <TransactionsModal Transactions="@CurrentMonthTransactions"/>
+        }
+            
+    </CardContent>
+</Card>
+
+@code
+{
+    [Parameter]
+    public SbankenInvestmentsViewModel SbankenInvestmentsViewModel { get; set; }
+    [Parameter]
+    public string DisplayName { get; set; }
+    [Parameter]
+    public string AmountPrefix { get; set; }
+
+    private decimal Value => SbankenInvestmentsViewModel?.Value ?? 0;
+    private decimal CurrentMonthTransactionsAmount => SbankenInvestmentsViewModel?.SbankenTransactionSummary?.CurrentMonthTransactions?.Amount ?? 0;
+    private decimal CurrentYearTransactionsAmount => SbankenInvestmentsViewModel?.SbankenTransactionSummary?.CurrentYearTransactions?.Amount ?? 0;
+    private decimal TotalTransactionsAmount => SbankenInvestmentsViewModel?.SbankenTransactionSummary?.TotalAmount ?? 0;
+
+    private IList<SbankenTransactionDto> CurrentMonthTransactions => SbankenInvestmentsViewModel?.SbankenTransactionSummary?.CurrentMonthTransactions?.Transactions ?? new List<SbankenTransactionDto>();
+
+}

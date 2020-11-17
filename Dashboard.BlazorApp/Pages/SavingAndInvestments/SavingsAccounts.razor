@@ -1,0 +1,20 @@
+@using Dashboard.BlazorApp.Helpers
+@using Dashboard.BlazorApp.ViewModels.Sbanken
+
+@if (SbankenAccountsViewModel?.SbankenAccounts == null)
+{
+    return;
+}
+
+@foreach (var account in SbankenAccountsViewModel.SbankenAccounts)
+    {
+        <Grid Item>
+            <SavingsAccount SbankenAccount="@account"/>
+        </Grid>
+    }
+
+@code
+{
+    [Parameter]
+    public SbankenAccountsViewModel SbankenAccountsViewModel { get; set; }
+}

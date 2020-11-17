@@ -1,0 +1,22 @@
+﻿@using Dashboard.BlazorApp.Layout
+
+<DashboardResources/>
+<MaterialScripts />
+<MaterialStyles />
+<ThemeProvider Theme="@Theme.Light" />
+<Router
+    AppAssembly="@typeof(FullLayout).Assembly">
+    <Found
+        Context="routeData">
+        <RouteView
+            RouteData="@routeData"
+            DefaultLayout="@typeof(FullLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView
+            Layout="@typeof(SmallLayout)">
+            <NotFound />
+        </LayoutView>
+    </NotFound>
+</Router>
+

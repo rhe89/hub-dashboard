@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Dashboard.Dto.Sbanken;
+using Dashboard.Integration.Dto.Sbanken;
 using Hub.Web.Http;
 using Microsoft.Extensions.Logging;
 
@@ -18,34 +18,34 @@ namespace Dashboard.Integration
 
         public SbankenApiConnector(HttpClient httpClient, ILogger<SbankenApiConnector> logger) : base(httpClient, logger, "SbankenApi") {}
 
-        public async Task<Response<TransactionDto[]>> GetTransactions(int ageInDays)
+        public async Task<Response<SbankenTransactionDto[]>> GetTransactions(int ageInDays)
         {
-            return await Get<TransactionDto[]>(TransactionsPath, $"ageInDays={ageInDays}");
+            return await Get<SbankenTransactionDto[]>(TransactionsPath, $"ageInDays={ageInDays}");
         }
         
-        public async Task<Response<TransactionSummaryDto>> GetMikrosparTransactions()
+        public async Task<Response<SbankenTransactionSummaryDto>> GetMikrosparTransactions()
         {
-            return await Get<TransactionSummaryDto>(MikrosparTransactionsPath);
+            return await Get<SbankenTransactionSummaryDto>(MikrosparTransactionsPath);
         }
         
-        public async Task<Response<TransactionSummaryDto>> GetInvestmentTransactions()
+        public async Task<Response<SbankenTransactionSummaryDto>> GetInvestmentTransactions()
         {
-            return await Get<TransactionSummaryDto>(InvestmentTransactionsPath);
+            return await Get<SbankenTransactionSummaryDto>(InvestmentTransactionsPath);
         }
         
-        public async Task<Response<IList<AccountDto>>> GetSavingsAccounts()
+        public async Task<Response<IList<SbankenAccountDto>>> GetSavingsAccounts()
         {
-            return await Get<IList<AccountDto>>(SavingAccountsPath);
+            return await Get<IList<SbankenAccountDto>>(SavingAccountsPath);
         }
         
-        public async Task<Response<IList<AccountDto>>> GetStandardAccounts()
+        public async Task<Response<IList<SbankenAccountDto>>> GetStandardAccounts()
         {
-            return await Get<IList<AccountDto>>(StandardAccountsPath);
+            return await Get<IList<SbankenAccountDto>>(StandardAccountsPath);
         }
         
-        public async Task<Response<IList<AccountDto>>> GetCreditAccounts()
+        public async Task<Response<IList<SbankenAccountDto>>> GetCreditAccounts()
         {
-            return await Get<IList<AccountDto>>(CreditAccountsPath);
+            return await Get<IList<SbankenAccountDto>>(CreditAccountsPath);
         }
     }
 }
