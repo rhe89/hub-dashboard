@@ -5,5 +5,5 @@ services:
         container_name: "dashboard_web"
         build: 
             context: ./
-            dockerfile: Dashboard.Web.Ui/Dockerfile
+            dockerfile: Dashboard.BlazorApp/Dockerfile
         image: "rhe89/hub-dashboard-web"
