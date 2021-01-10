@@ -6,6 +6,6 @@ namespace Dashboard.Integration
 {
     public class SpreadsheetApiConnector : HttpClientService, ISpreadsheetApiConnector
     {
-        public SpreadsheetApiConnector(HttpClient httpClient, ILogger<SpreadsheetApiConnector> logger) : base(httpClient, logger, "SpreadsheetApi") {}
+        public SpreadsheetApiConnector(HttpClient httpClient) : base(httpClient, "SpreadsheetApi") {}
     }
 }

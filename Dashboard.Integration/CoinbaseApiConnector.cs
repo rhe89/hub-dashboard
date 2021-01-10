@@ -11,7 +11,7 @@ namespace Dashboard.Integration
     {
         private const string AccountsPath = "/api/account/accounts";
         
-        public CoinbaseApiConnector(HttpClient httpClient, ILogger<CoinbaseApiConnector> logger) : base(httpClient, logger, "CoinbaseApi") {}
+        public CoinbaseApiConnector(HttpClient httpClient) : base(httpClient, "CoinbaseApi") {}
         
         public async Task<Response<IList<CoinbaseAccountDto>>> GetAccounts()
         {
