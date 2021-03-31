@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Hub.Web.BazorServer" Version="2.0.12" />
+        <PackageReference Include="Hub.Web.BazorServer" Version="3.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
         <PackageReference Include="ChartJs.Blazor" Version="1.0.2" />
         <PackageReference Include="Skclusive.Material.Layout" Version="2.0.0" />
